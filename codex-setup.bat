@@ -1,22 +1,22 @@
-@echo off & setlocal
+@echo off & setlocal EnableExtensions DisableDelayedExpansion
 rem codex-setup.bat - 一键配置 Codex (ChatGPT app) 模型提供方
 rem 双击即可运行。也可以先设置以下环境变量来预填内容：
 rem   set CODEX_NAME=wahaha & set CODEX_BASE_URL=https://api.example.com/v1 & set CODEX_KEY=sk-xxx
 rem   codex-setup.bat
 chcp 65001 >nul 2>&1
-title Codex 一键配置
+title Codex Setup
 where powershell >nul 2>&1 || (
   echo.
-  echo 没有找到 PowerShell，无法继续。
-  echo 请在 Windows 10 或更高版本的系统上运行本工具。
+  echo PowerShell was not found. Windows 10 or newer is required.
   echo.
   pause
-  exit /b 1
+  set "EXITCODE=1"
+  goto :BATCH_END
 )
 set "CODEX_SETUP_SELF=%~f0"
-powershell -NoProfile -ExecutionPolicy Bypass -Command "try { $s=[IO.File]::ReadAllText($env:CODEX_SETUP_SELF); $i=$s.LastIndexOf('#PSSTART'); if ($i -lt 0) { throw 'Embedded setup code was not found.' }; Invoke-Expression $s.Substring($i+8) } catch { Write-Host ''; Write-Host ('Setup failed: ' + $_.Exception.Message) -ForegroundColor Red; Write-Host ''; [void](Read-Host 'Press Enter to close this window'); exit 1 }"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "try { $s=[IO.File]::ReadAllText($env:CODEX_SETUP_SELF); $i=$s.LastIndexOf('#PSSTART'); $j=$s.LastIndexOf('#PSEND'); if ($i -lt 0 -or $j -le $i) { throw 'Embedded setup boundaries were not found.' }; Invoke-Expression $s.Substring($i+8, $j-($i+8)) } catch { Write-Host ''; Write-Host ('Setup failed: ' + $_.Exception.Message) -ForegroundColor Red; Write-Host ''; [void](Read-Host 'Press Enter to close this window'); exit 1 }"
 set "EXITCODE=%ERRORLEVEL%"
-exit /b %EXITCODE%
+goto :BATCH_END
 
 #PSSTART
 $ErrorActionPreference = 'Stop'
@@ -291,3 +291,7 @@ try {
   Write-Host ('  原因：' + $_.Exception.Message) -ForegroundColor Red
   Pause-Exit 1
 }
+#PSEND
+
+:BATCH_END
+exit /b %EXITCODE%
