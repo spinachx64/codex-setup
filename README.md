@@ -24,14 +24,21 @@
 
 ## macOS
 
-最简单的用法是双击 `codex-setup.command`，然后按终端中的提示输入三项内容。输入 API key 时屏幕不会显示字符，这是正常现象；输入完成后直接按回车。
+先把从 GitHub 下载的 ZIP 完整解压，不要只单独取出其中一个脚本。最简单的用法是双击 `codex-setup.command`，然后按终端中的提示输入三项内容。输入 API key 时屏幕不会显示字符，这是正常现象；输入完成后直接按回车。
 
-如果 macOS 第一次阻止打开，请在 Finder 中右键点击 `codex-setup.command`，选择“打开”，再确认一次。
+macOS 会检查从互联网下载的脚本。如果第一次双击被阻止，请在 Finder 中右键点击 `codex-setup.command`，选择“打开”，再确认一次。通常不需要进入“隐私与安全性”手动修改设置。
 
-也可以在“终端”中运行：
+如果仍然提示“没有执行权限”或无法打开，可以使用系统自带的 Bash 运行，不需要修改文件权限：
+
+1. 打开“终端”。
+2. 输入 `bash `（`bash` 后保留一个空格）。
+3. 把 `codex-setup.command` 从 Finder 拖到终端窗口中。
+4. 按回车运行。
+
+也可以先在终端进入解压后的目录，再运行：
 
 ```bash
-./codex-setup.sh
+bash codex-setup.command
 ```
 
 自动化调用示例：
