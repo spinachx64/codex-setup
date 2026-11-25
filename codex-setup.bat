@@ -238,7 +238,7 @@ try {
   $escapedUrl = ConvertTo-TomlString $url
   $escapedKey = ConvertTo-TomlString $key
   $result = New-Object 'System.Collections.Generic.List[string]'
-  if ($null -ne $modelLine) { [void]$result.Add($modelLine) } else { [void]$result.Add('model = "gpt-5.6-sol"') }
+  if ($null -ne $modelLine) { [void]$result.Add($modelLine) } else { [void]$result.Add('model = "gpt-6.1-sol"') }
   if ($null -ne $effortLine) { [void]$result.Add($effortLine) } else { [void]$result.Add('model_reasoning_effort = "high"') }
   [void]$result.Add('model_provider = "' + $escapedName + '"')
   [void]$result.Add('')

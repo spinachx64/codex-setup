@@ -61,7 +61,7 @@ bash codex-setup.command
 
 脚本会执行以下操作：
 
-- 如果原配置没有 `model`，写入 `model = "gpt-5.6-sol"`。
+- 如果原配置没有 `model`，写入 `model = "gpt-6.1-sol"`。
 - 如果原配置没有 `model_reasoning_effort`，写入 `model_reasoning_effort = "high"`。
 - 已存在的 `model` 和 `model_reasoning_effort` 会保留原值。
 - 把 `model_provider` 切换为本次填写的服务商。

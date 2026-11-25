@@ -141,7 +141,7 @@ TMP="$(mktemp "$CONFIG_DIR/.config.toml.tmp.XXXXXX")"
 trap 'rm -f "$TMP"' EXIT
 
 {
-  echo "${MODEL_LINE:-model = \"gpt-5.6-sol\"}"
+  echo "${MODEL_LINE:-model = \"gpt-6.1-sol\"}"
   echo "${EFFORT_LINE:-model_reasoning_effort = \"high\"}"
   echo "model_provider = \"$ESCAPED_NAME\""
   echo
